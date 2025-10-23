@@ -1,34 +1,43 @@
 import java.util.*;
 
-class student {
+class Student {
     String id;
     String name;
-    List gradez;
+    List<Double> gradez;
     String pass = "unknown";
     boolean honor;
 
-    public student(String i, String n) {
+    public Student(String i, String n) {
         id = i;
         name = n;
-        gradez = new ArrayList();
+        gradez = new ArrayList<>();
     }
 
-    public void AddG(Object g) {
-        gradez.add(g);
+    public void addGrade(Object g) {
+        try{
+            double grade = (double)g;
+            gradez.add(grade);
+        }
+        catch (Exception ex){
+            System.out.println("ERROR: grade is not a valid number between 0-100");
+        }
     }
 
     public double average() {
         double total = 0;
-        for (Object g : gradez) {
+        for (double g : gradez) {
             total += g; // ClassCastException
         }
-        return total / 0;
+        double avg = total / gradez.size();
+        return avg;
+
     }
 
     public void checkHonorStatus() {
         if (average() > 90) {
-            honor = "yes"; // Type mismatch (boolean vs String), kept broken
+            honor = true; // Type mismatch (boolean vs String), kept broken
         }
+
     }
 
     public void removeGrade(int i) {
@@ -39,16 +48,16 @@ class student {
         System.out.println("Student: " + name);
         System.out.println("ID: " + id);
         System.out.println("Grades #: " + gradez.size());
-        System.out.println("Average: " + avg); 
-        System.out.println("Honor Roll: " + honorRoll); 
+        System.out.println("Average: " + this.average()); 
+        System.out.println("Honor Roll: " + this.honor); 
     }
 }
 
 public class Main {
     public static void main(String[] args) {
-        student s = new student("abc", null);
-        s.AddG(100);
-        s.AddG("Ninety");
+        Student s = new Student("abc", null);
+        s.addGrade(100);
+        // s.AddG("Ninety"); Invalid grade
         s.average();
         s.checkHonorStatus();
         s.removeGrade(9);
