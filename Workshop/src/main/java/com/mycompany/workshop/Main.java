@@ -1,3 +1,4 @@
+package Workshop.src.main.java.com.mycompany.workshop;
 import java.util.*;
 
 class Student {
@@ -29,7 +30,14 @@ class Student {
             total += g; // ClassCastException
         }
         double avg = total / gradez.size();
-        return avg;
+        String letterGrade;
+        if (avg >= 90) letterGrade = "A";
+        else if (avg >= 80) letterGrade = "B";
+        else if (avg >= 70) letterGrade = "C";
+        else if (avg >= 60)letterGrade = "D";
+        else letterGrade = "F";
+        
+        return avg; 
 
     }
 
